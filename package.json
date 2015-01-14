@@ -1,0 +1,23 @@
+{
+  "name": "twitchbox-follower-alert",
+  "version": "1.0.0",
+  "description": "Combined follower alert for hitbox and twitch",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/asser-dk/twitchbox-follower-alert.git"
+  },
+  "keywords": [
+    "twitch",
+    "hitbox"
+  ],
+  "author": "Asser",
+  "license": "MIT License",
+  "bugs": {
+    "url": "https://github.com/asser-dk/twitchbox-follower-alert/issues"
+  },
+  "homepage": "https://github.com/asser-dk/twitchbox-follower-alert"
+}
