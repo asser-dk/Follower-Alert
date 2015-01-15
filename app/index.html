@@ -50,20 +50,25 @@
         you visit this site.</p>
 
     <div class="row">
-        <label>Twitch channel name: <input type="text" id="twitchChannelName" class="stored" name="twitchChannelName"/></label>
+        <label>Twitch channel name: <input type="text" id="twitchChannelName" class="stored"
+                                           name="twitchChannelName"/></label>
     </div>
     <div class="row">
-        <label>Hitbox channel name: <input type="text" id="hitboxChannelName" class="stored" name="hitboxChannelName"/></label>
+        <label>Hitbox channel name: <input type="text" id="hitboxChannelName" class="stored"
+                                           name="hitboxChannelName"/></label>
     </div>
     <div class="row">
         <label>Image link: <a href="#" data-reveal-id="image-help-modal"><i class="fa fa-question-circle"></i></a>
             <input type="text" id="imageSource" class="stored" name="imageSource"/></label>
     </div>
     <div class="row">
+        <label>Sound link: <a href="#" data-reveal-id="sound-help-modal"><i class="fa fa-question-circle"></i></a>
+            <input type="text" id="soundSource" class="stored" name="soundSource"/></label>
     </div>
-    <label>Sound link: <a href="#" data-reveal-id="sound-help-modal"><i class="fa fa-question-circle"></i></a>
-        <input type="text" id="soundSource" class="stored" name="soundSource"/></label>
-
+    <div class="row">
+        <label>Preview notification on launch: <input type="checkbox" class="stored" id="previewNotification"
+                                                      name="previewNotification"/></label>
+    </div>
     <div class="row">
         <a href="#" class="launch-follower-notification button">Launch</a>
     </div>
@@ -191,11 +196,13 @@
         var hitboxChannelName = localStorage.hitboxChannelName;
         var imageSource = localStorage.imageSource;
         var soundSource = localStorage.soundSource;
+        var previewNotification = localStorage.previewNotification;
 
         $('#twitchChannelName').val(twitchChannelName);
         $('#hitboxChannelName').val(hitboxChannelName);
         $('#imageSource').val(imageSource);
         $('#soundSource').val(soundSource);
+        $('#previewNotification').prop('checked', previewNotification);
 
         $('.stored').change(function (args)
         {
@@ -220,7 +227,8 @@
             window.open('follower-alert.htm?twitchChannelName=' + encodeURIComponent(twitchChannelName)
             + '&hitboxChannelName=' + encodeURIComponent(hitboxChannelName)
             + '&imageSource=' + encodeURIComponent(imageSource)
-            + '&soundSource=' + encodeURIComponent(soundSource));
+            + '&soundSource=' + encodeURIComponent(soundSource)
+            + '&preview=' + encodeURIComponent(previewNotification));
         }
     });
 </script>
