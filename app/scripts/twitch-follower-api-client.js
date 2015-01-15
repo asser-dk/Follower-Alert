@@ -1,62 +1,65 @@
-function getFollows(channelName, offset, limit, follows, newFollowsCallback)
+function listenForNewTwitchFollowers(channelName, newFollowerCallback)
 {
-    $.getJSON('https://api.twitch.tv/kraken/channels/' + encodeURIComponent(channelName) + '/follows?direction=DESC&offset=' + offset + '&limit=' + limit + '&callback=?', function (data)
+    getFollowers(channelName, 0, 100, [], newFollowerCallback);
+
+    function getFollowers(channelName, offset, limit, followers, newFollowerCallback)
     {
-        if (data.follows.length > 0)
+        $.getJSON('https://api.twitch.tv/kraken/channels/' + encodeURIComponent(channelName) + '/follows?direction=DESC&offset=' + offset + '&limit=' + limit + '&callback=?', function (data)
         {
-            console.log('[Twitch] Fetched ' + data.follows.length + ' follows from offset ' + offset);
-
-            data.follows.forEach(function (follow)
+            if (data.follows.length > 0)
             {
-                follows.push(follow.user._id);
-            });
+                console.log('[Twitch] Fetched ' + data.follows.length + ' followers from offset ' + offset);
 
-            if (data.follows.length == limit)
-            {
-                getFollows(channelName, offset + limit, limit, follows, newFollowsCallback);
-
-            } else
-            {
-                console.log('[Twitch] Done fetching all follows.');
-                checkForNewFollows(channelName, follows, limit, newFollowsCallback);
-                setInterval(checkForNewFollows, 10000, channelName, follows, limit, newFollowsCallback);
-            }
-        }
-    });
-}
-
-function listenForNewFollows(channelName, callbackForNewFollows)
-{
-    getFollows(channelName, 0, 100, [], callbackForNewFollows);
-}
-
-function checkForNewFollows(channelName, follows, limit, callbackForNewFollows)
-{
-    $.getJSON('https://api.twitch.tv/kraken/channels/' + encodeURIComponent(channelName) + '/follows?direction=DESC&offset=0&limit=' + limit + '&callback=?', function (data)
-    {
-        console.log('[Twitch] Checking for new follows.');
-        if (data.follows.length > 0)
-        {
-            var newFollows = [];
-
-            data.follows.forEach(function (follow)
-            {
-                if (follows.indexOf(follow.user._id) < 0)
+                data.follows.forEach(function (follow)
                 {
-                    console.log('[Twitch] ' + follow.user._id + '(' + follow.user.display_name + ') is a new follower.');
-                    newFollows.push({user: follow.user.display_name, provider: 'Twitch'});
-                    follows.push(follow.user._id);
-                }
-            });
+                    followers.push(follow.user._id);
+                });
 
-            if (newFollows.length > 0)
-            {
-                console.log('[Twitch] Found ' + newFollows.length + ' new follows.');
-                callbackForNewFollows(newFollows);
-            } else
-            {
-                console.log('[Twitch] No new followers.');
+                if (data.follows.length == limit)
+                {
+                    getFollowers(channelName, offset + limit, limit, followers, newFollowerCallback);
+
+                } else
+                {
+                    console.log('[Twitch] Done fetching all followers.');
+                    checkForNewFollowers(channelName, followers, limit, newFollowerCallback);
+                    setInterval(checkForNewFollowers, 10000, channelName, followers, limit, newFollowerCallback);
+                }
             }
-        }
-    });
+        });
+    }
+
+    function checkForNewFollowers(channelName, followers, limit, newFollowerCallback)
+    {
+        $.getJSON('https://api.twitch.tv/kraken/channels/' + encodeURIComponent(channelName) + '/follows?direction=DESC&offset=0&limit=' + limit + '&callback=?', function (data)
+        {
+            console.log('[Twitch] Checking for new followers.');
+            if (data.follows.length > 0)
+            {
+                var newFollower;
+
+                for (var i = 0; i < data.follows.length; i++)
+                {
+                    var follower = data.follows[i];
+
+                    if (followers.indexOf(follower.user._id) < 0)
+                    {
+                        console.log('[Twitch] ' + follower.user._id + ' (' + follower.user.display_name + ') is a new follower.');
+                        newFollower = {user: follower.user.display_name, provider: 'Twitch'};
+                        followers.push(follower.user._id);
+                        break;
+                    }
+                }
+
+                if (newFollower)
+                {
+                    console.log('[Twitch] Found a new follower.');
+                    newFollowerCallback(newFollower);
+                } else
+                {
+                    console.log('[Twitch] No new followers.');
+                }
+            }
+        });
+    }
 }

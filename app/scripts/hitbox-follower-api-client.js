@@ -1,68 +1,71 @@
-function getFollowers(channelName, offset, limit, followers, newFollowersCallback)
+function listenForNewHitboxFollowers(channelName, newFollowerCallback)
 {
-    $.getJSON('https://api.hitbox.tv/followers/user/' + encodeURIComponent(channelName) + '?offset=' + offset + '&limit=' + limit, function (data)
+    getFollowers(channelName, 0, 100, [], newFollowerCallback);
+
+    function getFollowers(channelName, offset, limit, followers, newFollowerCallback)
     {
-        if (data.followers.length > 0)
+        $.getJSON('https://api.hitbox.tv/followers/user/' + encodeURIComponent(channelName) + '?offset=' + offset + '&limit=' + limit, function (data)
         {
-            console.log('[Hitbox] Fetched ' + data.followers.length + ' followers from offset ' + offset);
-
-            data.followers.forEach(function (follow)
+            if (data.followers.length > 0)
             {
-                followers.push(follow.user_id);
-            });
+                console.log('[Hitbox] Fetched ' + data.followers.length + ' followers from offset ' + offset);
 
-            if (data.followers.length == limit)
-            {
-                getFollowers(channelName, (offset + limit), limit, followers, newFollowersCallback);
+                data.followers.forEach(function (follow)
+                {
+                    followers.push(follow.user_id);
+                });
 
-            } else
-            {
-                console.log('[Hitbox] Done fetching all follows.');
-                checkForNewFollowers(channelName, followers, limit, newFollowersCallback);
-                setInterval(checkForNewFollowers, 10000, channelName, followers, limit, newFollowersCallback);
+                if (data.followers.length == limit)
+                {
+                    getFollowers(channelName, (offset + limit), limit, followers, newFollowerCallback);
+
+                } else
+                {
+                    console.log('[Hitbox] Done fetching all follows.');
+                    checkForNewFollowers(channelName, followers, limit, newFollowerCallback);
+                    setInterval(checkForNewFollowers, 10000, channelName, followers, limit, newFollowerCallback);
+                }
             }
-        }
-    });
-}
-
-function listenForNewFollowers(channelName, callbackForNewFollowers)
-{
-    getFollowers(channelName, 0, 100, [], callbackForNewFollowers);
-}
-
-function checkForNewFollowers(channelName, followers, limit, callbackForNewFollowers)
-{
-    var offset = 0;
-    if (followers.length > limit / 2)
-    {
-        offset = Math.floor(followers.length / limit) - limit / 2;
+        });
     }
 
-    $.getJSON('https://api.hitbox.tv/followers/user/' + encodeURIComponent(channelName) + '?offset=' + offset + '&limit=' + limit, function (data)
+    function checkForNewFollowers(channelName, followers, limit, newFollowerCallback)
     {
-        console.log('[Hitbox] Checking for new follows.');
-        if (data.followers.length > 0)
+        var offset = 0;
+        if (followers.length > limit / 2)
         {
-            var newFollows = [];
-
-            data.followers.forEach(function (follower)
-            {
-                if (followers.indexOf(follower.user_id) < 0)
-                {
-                    console.log('[Hitbox] ' + follower.user_id + '(' + follower.user_name + ') is a new follower.');
-                    newFollows.push({user: follower.user_name, provider: 'Hitbox'});
-                    followers.push(follower.user_id);
-                }
-            });
-
-            if (newFollows.length > 0)
-            {
-                console.log('[Hitbox] Found ' + newFollows.length + ' new follows.');
-                callbackForNewFollowers(newFollows);
-            } else
-            {
-                console.log('[Hitbox] No new followers.');
-            }
+            offset = Math.floor(followers.length / limit) - limit / 2;
         }
-    });
+
+        $.getJSON('https://api.hitbox.tv/followers/user/' + encodeURIComponent(channelName) + '?offset=' + offset + '&limit=' + limit, function (data)
+        {
+            console.log('[Hitbox] Checking for new follows.');
+            if (data.followers.length > 0)
+            {
+                var newFollower;
+
+                for(var i = 0; i < data.followers.length; i++)
+                {
+                    var follower = data.followers[i];
+
+                    if (followers.indexOf(follower.user_id) < 0)
+                    {
+                        console.log('[Hitbox] ' + follower.user_id + ' (' + follower.user_name + ') is a new follower.');
+                        newFollower = {user: follower.user_name, provider: 'Hitbox'};
+                        followers.push(follower.user_id);
+                        break;
+                    }
+                }
+
+                if (newFollower)
+                {
+                    console.log('[Hitbox] Found a new follower.');
+                    newFollowerCallback(newFollower);
+                } else
+                {
+                    console.log('[Hitbox] No new followers.');
+                }
+            }
+        });
+    }
 }
