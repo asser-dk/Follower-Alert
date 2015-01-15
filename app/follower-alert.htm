@@ -1,45 +1,11 @@
 <html>
 <head>
     <title>TwitchBox follower alert</title>
+    <link rel="stylesheet" href="styles/followerAlert.css" />
     <script src="scripts/bower/jquery/dist/jquery.min.js"></script>
     <script src="scripts/url-utils.js"></script>
     <script src="scripts/twitch-follower-api-client.js"></script>
     <script src="scripts/hitbox-follower-api-client.js"></script>
-    <style>
-        .follower-alert {
-            position: relative;
-            width: 580px;
-            height: 110px;
-            color: #ffffff;
-        }
-
-        .follower-alert .name {
-            position: absolute;
-            width: 340px;
-            top: 52px;
-            left: 110px;
-            font-size: 30px;
-            line-height: 30px;
-            font-weight: bold;
-            text-shadow: 2px 2px #666666;
-            font-family: "Lucida Grande", "Trebuchet MS", sans-serif;
-            float: left;
-            text-align: center;
-        }
-
-        .follower-alert .provider {
-            position: absolute;
-            top: 20px;
-            left: 355px;
-            font-size: 20px;
-            line-height: 20px;
-            text-shadow: 1px 1px #666666;
-            font-family: "Lucida Grande", "Trebuchet MS", sans-serif;
-            float: left;
-            width: 100px;
-            text-align: right;
-        }
-    </style>
 </head>
 <body>
 <div class="follower-alert">
