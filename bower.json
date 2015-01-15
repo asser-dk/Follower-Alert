@@ -1,0 +1,11 @@
+{
+  "name": "twitchbox-follower-alert",
+  "version": "1.0.0",
+  "description": "Combined follower alert for hitbox and twitch",
+  "dependencies": {
+    "jquery": "~2.1.3",
+    "foundation": "~5.5.0",
+    "font-awesome": "~4.2.0",
+    "highlight.js": "~7.3.0"
+  }
+}
