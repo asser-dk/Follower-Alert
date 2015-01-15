@@ -32,6 +32,10 @@
                         class="fa fa-github"></i> Source at GitHub</a>
             </li>
             <li class="divider"></li>
+            <li>
+                <a href="#" data-reveal-id="custom-css-modal"><i class="fa fa-css3"></i> Custom CSS</a>
+            </li>
+            <li class="divider"></li>
             <li class="has-dropdown">
                 <a href="#" class="launch-follower-notification"><i class="fa fa-rocket"></i> Launch</a>
                 <ul class="dropdown">
@@ -43,6 +47,44 @@
 </nav>
 <a href="#" class="launch-follower-notification button large large-launch-button">Launch</a>
 
+<div id="custom-css-modal" class="reveal-modal" data-reveal>
+    <h2>Custom CSS</h2>
+
+    <p class="lead">Further customize your follower alert.</p>
+
+    <p>This is the CSS the follower alert is using as default. You can copy and modify this for use with your favourite
+        streaming software.</p>
+    <pre><code class="css">.follower-alert {
+    position: relative;
+    width: 500px;
+    height: 100px;
+    color: white;
+    font-family: "Lucida Grande", "Trebuchet MS", sans-serif;
+    text-align: center;
+}
+
+.follower-alert .name {
+    position: absolute;
+    width: 420px;
+    top: 37px;
+    left: 40px;
+    font-size: 40px;
+    line-height: 50px;
+    font-weight: bold;
+    text-shadow: 2px 2px #666666;
+}
+
+.follower-alert .provider {
+    position: absolute;
+    width: 420px;
+    left: 40px;
+    top: 12px;
+    font-size: 20px;
+    line-height: 20px;
+    text-shadow: 1px 1px #666666;
+}</code></pre>
+    <i class="close-reveal-modal fa fa-close"></i>
+</div>
 <div id="quick-launch-modal" class="quick-launch reveal-modal" data-reveal>
     <h2>Quick launch</h2>
 
@@ -112,43 +154,6 @@
         <br/>
         <img src="images/help/imgur/UploadStep3.png"/>
     </p>
-    <h3>Custom CSS</h3>
-    <p>This is the CSS the follower alert is using currently.</p>
-    <pre><code class="css">
-.follower-alert {
-    position: relative;
-    width: 580px;
-    height: 110px;
-    color: #ffffff;
-}
-
-.follower-alert .name {
-    position: absolute;
-    width: 340px;
-    top: 52px;
-    left: 110px;
-    font-size: 30px;
-    line-height: 30px;
-    font-weight: bold;
-    text-shadow: 2px 2px #666666;
-    font-family: "Lucida Grande", "Trebuchet MS", sans-serif;
-    float: left;
-    text-align: center;
-}
-
-.follower-alert .provider {
-    position: absolute;
-    top: 20px;
-    left: 355px;
-    font-size: 20px;
-    line-height: 20px;
-    text-shadow: 1px 1px #666666;
-    font-family: "Lucida Grande", "Trebuchet MS", sans-serif;
-    float: left;
-    width: 100px;
-    text-align: right;
-}
-    </code></pre>
     <a href="#" class="button secondary" data-reveal-id="quick-launch-modal"><i class="fa fa-arrow-left"></i> Back</a>
     <i class="close-reveal-modal fa fa-arrow-left" data-reveal-id="quick-launch-modal"></i>
 </div>
