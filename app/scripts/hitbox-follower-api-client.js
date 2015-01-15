@@ -32,7 +32,12 @@ function listenForNewFollowers(channelName, callbackForNewFollowers)
 
 function checkForNewFollowers(channelName, followers, limit, callbackForNewFollowers)
 {
-    var offset = Math.floor(followers.length / limit);
+    var offset = 0;
+    if (followers.length > limit / 2)
+    {
+        offset = Math.floor(followers.length / limit) - limit / 2;
+    }
+
     $.getJSON('https://api.hitbox.tv/followers/user/' + encodeURIComponent(channelName) + '?offset=' + offset + '&limit=' + limit, function (data)
     {
         console.log('[Hitbox] Checking for new follows.');
