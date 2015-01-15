@@ -17,6 +17,7 @@
     {
         var followerAlert = $('.follower-alert');
         followerAlert.hide();
+
         var twitchChannelName = getUrlParameter('twitchChannelName');
         var hitboxChannelName = getUrlParameter('hitboxChannelName');
         var backgroundImage = getUrlParameter('imageSource');
@@ -62,7 +63,6 @@
 
         function newFollower(follower)
         {
-            var followerAlert = $('.follower-alert');
             followerAlert.hide();
 
             if (soundSource)
