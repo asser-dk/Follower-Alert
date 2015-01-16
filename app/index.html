@@ -9,12 +9,13 @@
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/default.min.css">
     <link rel="stylesheet" href="styles/followerAlert.css"/>
     <link rel="stylesheet" href="styles/style.css">
-    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
     <script src="scripts/bower/jquery/dist/jquery.min.js"></script>
     <script src="scripts/bower/foundation/js/vendor/modernizr.js"></script>
     <script src="scripts/bower/foundation/js/foundation.min.js"></script>
     <script src="scripts/bower/foundation/js/foundation/foundation.reveal.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
     <script src="scripts/url-utils.js"></script>
+    <script src="scripts/setup.js"></script>
 </head>
 <body>
 <nav class="top-bar" data-topbar role="navigation">
@@ -234,17 +235,11 @@
             }
             else
             {
-                launchFollowerAlert();
+                launchFollowerAlert(twitchChannelName, hitboxChannelName, imageSource, soundSource, previewNotification);
             }
         });
 
-        function launchFollowerAlert()
         {
-            window.open('follower-alert.htm?twitchChannelName=' + encodeURIComponent(twitchChannelName)
-            + '&hitboxChannelName=' + encodeURIComponent(hitboxChannelName)
-            + '&imageSource=' + encodeURIComponent(imageSource)
-            + '&soundSource=' + encodeURIComponent(soundSource)
-            + '&preview=' + encodeURIComponent(previewNotification));
         }
     });
 </script>
