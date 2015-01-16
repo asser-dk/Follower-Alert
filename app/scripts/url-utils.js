@@ -10,3 +10,15 @@ function getUrlParameter(sParam) {
         }
     }
 }
+
+function addArgumentToUrl(url, argumentName, argumentValue)
+{
+    if (url.indexOf('?') < 0)
+    {
+        return url + '?' + argumentName + '=' + encodeURIComponent(argumentValue);
+    }
+    else
+    {
+        return url + '&' + argumentName + '=' + encodeURIComponent(argumentValue);
+    }
+}
