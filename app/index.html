@@ -30,6 +30,10 @@
             <li>
                 <a href="#">Twitch+Hitbox follower alert</a>
             </li>
+            <li class="divider"></li>
+            <li>
+                <a href="#" data-reveal-id="about-modal"><i class="fa fa-question-circle"></i> About</a>
+            </li>
         </ul>
         <ul class="right">
             <li>
@@ -58,7 +62,16 @@
 </div>
 <a href="#" class="launch-follower-notification button large large-launch-button"><i class="fa fa-rocket"></i>
     Launch</a>
-
+<div id="about-modal" class="reveal-modal" data-reveal>
+    <h2>About</h2>
+    <p class="lead">A follower alert for both Twitch and Hitbox.</p>
+    <p>I was looking around for a follower alert for my stream that listened to both Twitch and Hitbox but I couldn't find anything I thought was fairly easy to set up so I made my own. I have made this website available so you can use it too.</p>
+    <p>The setup and configuration is similar/identical to other follower alerts, such as i.e. <a href="https://nightdev.com/followalert/" target="_blank">NightDevs follower alert</a>, so if you know how to set that up you know how to set this one up as well.</p>
+    <p>Once you have entered your settings for the follower alert you can either launch the follower alert right away and use i.e. window capture and chromakey to add it to your stream, or you can get the link directly and use a plugin for your stream software that loads data from a website (i.e. <a href="https://obsproject.com/forum/resources/clr-browser-source-plugin.22/" target="_blank">CLR Browser for OBS</a>).</p>
+    <p>The website will remember your settings for when you return so if you've set it up before you can simply click "<a href="#" class="launch-follower-notification"><i class="fa fa-rocket"></i> Launch"</a></p>
+    <p>If you have any feedback/bug reports/feature requests then go to <a href="https://github.com/asser-dk/twitchbox-follower-alert/issues" target="_blank"><i class="fa fa-github"></i> GitHub</a> and create an issue and I will have a look.</p>
+    <i class="close-reveal-modal fa fa-close"></i>
+</div>
 <div id="obs-installation-modal" class="reveal-modal" data-reveal>
     <h2>OBS Installation</h2>
 
