@@ -56,9 +56,13 @@
         </ul>
     </section>
 </nav>
-<div class="follower-alert">
+<div class="follower-alert preview1">
     <div class="provider">Hitbox</div>
     <div class="name">SexyFishHorse</div>
+</div>
+<div class="follower-alert preview2">
+    <div class="provider">Twitch</div>
+    <div class="name">S3xyFishHorse</div>
 </div>
 <a href="#" class="launch-follower-notification button large large-launch-button"><i class="fa fa-rocket"></i>
     Launch</a>
@@ -271,7 +275,8 @@
 
         hljs.initHighlightingOnLoad();
 
-        $('.follower-alert').hide().fadeIn(2000).delay(6000).fadeOut(2000);
+        $('.follower-alert').hide();
+        $('.preview1').fadeIn(2000).delay(6000).fadeOut(2000).next().delay(10000).fadeIn(2000).delay(6000).fadeOut(2000);
 
         var twitchChannelName = localStorage.twitchChannelName;
         var hitboxChannelName = localStorage.hitboxChannelName;
