@@ -199,7 +199,6 @@
         $(document).foundation();
 
         $('.reveal-modal').css('max-height', $('html').height() - 110 + 'px'); // 100 +10px to keep modal effect visible
-
         $(window).resize(function ()
         {
             $('.reveal-modal').css('max-height', $('html').height() - 110 + 'px');
@@ -228,6 +227,7 @@
 
         $('.launch-follower-notification').click(function ()
         {
+            updateVariablesFromLocalStorage();
             if (!twitchChannelName && !hitboxChannelName)
             {
                 console.warn('No channel names set. Opening configuration modal.');
@@ -239,7 +239,13 @@
             }
         });
 
+        function updateVariablesFromLocalStorage()
         {
+            twitchChannelName = localStorage.twitchChannelName;
+            hitboxChannelName = localStorage.hitboxChannelName;
+            imageSource = localStorage.imageSource;
+            soundSource = localStorage.soundSource;
+            previewNotification = localStorage.previewNotification;
         }
     });
 </script>
