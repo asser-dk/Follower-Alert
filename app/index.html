@@ -100,7 +100,7 @@
     <div class="row">
         <label>
             <input type="text" id="follower-alert-url" readonly/>
-            Press Ctrl/Cmd + C to copy the link.
+            Click the link and press Ctrl/Cmd + C to copy the link.
         </label>
     </div>
     <i class="close-reveal-modal fa fa-close"></i>
@@ -293,16 +293,12 @@
         $('.generate-follower-notification-url').click(function ()
         {
             updateVariablesFromLocalStorage();
-
-            $('#follower-alert-url').val(generateFollowerAlertUrl(twitchChannelName, hitboxChannelName, imageSource, soundSource, previewNotification));
-        });
-
-        $(document).on('opened.fndtn.reveal', '[data-reveal]', function () {
-            var modal = $(this);
-            if(modal[0].id === 'follower-alert-url-modal')
+            $('#follower-alert-url')
+                    .val(generateFollowerAlertUrl(twitchChannelName, hitboxChannelName, imageSource, soundSource, previewNotification))
+                    .click(function()
             {
-                $('#follower-alert-url').select();
-            }
+                $(this).select();
+            });
         });
 
         function updateVariablesFromLocalStorage()
