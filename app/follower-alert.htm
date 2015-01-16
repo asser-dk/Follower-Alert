@@ -22,6 +22,7 @@
         var hitboxChannelName = getUrlParameter('hitboxChannelName');
         var backgroundImage = getUrlParameter('imageSource');
         var soundSource = getUrlParameter('soundSource');
+        var preview = getUrlParameter('preview');
         var sound;
 
         if (soundSource)
@@ -59,6 +60,18 @@
         else
         {
             listenForNewHitboxFollowers(hitboxChannelName, newFollower)
+        }
+
+        if (preview)
+        {
+            console.log('Firing preview');
+            if (twitchChannelName)
+            {
+                newFollower({user: twitchChannelName, provider: 'Twitch'});
+            } else
+            {
+                newFollower({user: hitboxChannelName, provider: 'Hitbox'});
+            }
         }
 
         function newFollower(follower)
