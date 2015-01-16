@@ -6,13 +6,15 @@
     <link rel="stylesheet" href="scripts/bower/font-awesome/css/font-awesome.min.css"/>
     <link rel="stylesheet" href="scripts/bower/foundation/css/foundation.css"/>
     <link rel="stylesheet" href="styles/topbarOverride.css"/>
-    <link rel="stylesheet" href="styles/style.css">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/default.min.css">
+    <link rel="stylesheet" href="styles/followerAlert.css"/>
+    <link rel="stylesheet" href="styles/style.css">
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
     <script src="scripts/bower/jquery/dist/jquery.min.js"></script>
     <script src="scripts/bower/foundation/js/vendor/modernizr.js"></script>
     <script src="scripts/bower/foundation/js/foundation.min.js"></script>
     <script src="scripts/bower/foundation/js/foundation/foundation.reveal.js"></script>
+    <script src="scripts/url-utils.js"></script>
 </head>
 <body>
 <nav class="top-bar" data-topbar role="navigation">
@@ -47,7 +49,12 @@
         </ul>
     </section>
 </nav>
-<a href="#" class="launch-follower-notification button large large-launch-button"><i class="fa fa-rocket"></i> Launch</a>
+<div class="follower-alert">
+    <div class="provider">Hitbox</div>
+    <div class="name">SexyFishHorse</div>
+</div>
+<a href="#" class="launch-follower-notification button large large-launch-button"><i class="fa fa-rocket"></i>
+    Launch</a>
 
 <div id="custom-css-modal" class="reveal-modal" data-reveal>
     <h2>Custom CSS</h2>
@@ -198,6 +205,8 @@
         });
 
         hljs.initHighlightingOnLoad();
+
+        $('.follower-alert').hide().fadeIn(2000).delay(6000).fadeOut(2000);
 
         var twitchChannelName = localStorage.twitchChannelName;
         var hitboxChannelName = localStorage.hitboxChannelName;
