@@ -37,6 +37,7 @@
                         class="fa fa-github"></i> Source at GitHub</a>
             </li>
             <li class="divider"></li>
+            <li><a href="#" data-reveal-id="obs-installation-modal"><i class="fa fa-cogs"></i> OBS installation</a></li>
             <li>
                 <a href="#" data-reveal-id="custom-css-modal"><i class="fa fa-css3"></i> Custom CSS</a>
             </li>
@@ -57,6 +58,40 @@
 <a href="#" class="launch-follower-notification button large large-launch-button"><i class="fa fa-rocket"></i>
     Launch</a>
 
+<div id="obs-installation-modal" class="reveal-modal" data-reveal>
+    <h2>OBS Installation</h2>
+
+    <p class="lead">Integrate the follower alert with OBS</p>
+
+    <p>This guide assumes you already have <a href="http://obsproject.com" target="_blank">OBS</a> installed and you
+        have a basic understanding on how to use the application.</p>
+
+    <p>
+        <strong>Prerequisite:</strong>
+        Download and install the <a href="https://obsproject.com/forum/resources/clr-browser-source-plugin.22/"
+                                    target="_blank">CLR Browser Source Plugin for OBS</a>.
+    </p>
+
+    <p>
+        <strong>Step 1:</strong>
+        Add a new "CLR Browser" source to a scene.
+        <br/>
+        <img src="images/help/obs/Step1.png" />
+    </p>
+    <p>
+        <strong>Step 2:</strong>
+        Paste in your generated follower alert url in the text box. Set the height to 100 and the width to 500.
+        <br/>
+        <img src="images/help/obs/Step2.png" />
+    </p>
+    <p>
+        <strong>Step 3 (optional):</strong>
+        If you want to customize your follower alert further, paste in your custom CSS here.
+        <br/>
+        <img src="images/help/obs/Step3.png" />
+    </p>
+    <i class="close-reveal-modal fa fa-close"></i>
+</div>
 <div id="follower-alert-url-modal" class="reveal-modal" data-reveal>
     <h2>Follower alert URL</h2>
 
