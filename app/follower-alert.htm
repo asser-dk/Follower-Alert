@@ -19,11 +19,11 @@
         var followerAlert = $('.follower-alert');
         followerAlert.hide();
 
-        var twitchChannelName = getUrlParameter('twitchChannelName');
-        var hitboxChannelName = getUrlParameter('hitboxChannelName');
-        var backgroundImage = getUrlParameter('imageSource');
-        var soundSource = getUrlParameter('soundSource');
-        var preview = getUrlParameter('preview');
+        var twitchChannelName = getUrlParameterValue('twitchChannelName');
+        var hitboxChannelName = getUrlParameterValue('hitboxChannelName');
+        var backgroundImage = getUrlParameterValue('imageSource');
+        var soundSource = getUrlParameterValue('soundSource');
+        var preview = getUrlParameterValue('preview');
         var sound;
 
         if (soundSource)
