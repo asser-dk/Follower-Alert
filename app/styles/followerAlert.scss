@@ -1,0 +1,33 @@
+$text-shadow-colour: #666666;
+$font-family: "Lucida Grande", "Trebuchet MS", sans-serif;
+$font-color: #ffffff;
+
+.follower-alert {
+    position: relative;
+    width: 500px;
+    height: 100px;
+    color: $font-color;
+    font-family: $font-family;
+    text-align: center;
+
+    .name {
+        position: absolute;
+        width: 420px;
+        top: 37px;
+        left: 40px;
+        font-size: 40px;
+        line-height: 50px;
+        font-weight: bold;
+        text-shadow: 2px 2px $text-shadow-colour;
+    }
+
+    .provider {
+        position: absolute;
+        width: 420px;
+        left: 40px;
+        top: 12px;
+        font-size: 20px;
+        line-height: 20px;
+        text-shadow: 1px 1px $text-shadow-colour;
+    }
+}

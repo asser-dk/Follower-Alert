@@ -1,12 +1,27 @@
-function getUrlParameter(sParam) {
-    var sPageURL = window.location.search.substring(1);
-    var sURLVariables = sPageURL.split('&');
+function getUrlParameterValue(parameter)
+{
+    var url = window.location.search.substring(1);
+    var urlVariables = url.split('&');
 
-    for (var i = 0; i < sURLVariables.length; i++) {
-        var sParameterName = sURLVariables[i].split('=');
+    for (var i = 0; i < urlVariables.length; i++)
+    {
+        var parameterName = urlVariables[i].split('=');
 
-        if (sParameterName[0] == sParam) {
-            return decodeURIComponent(sParameterName[1]);
+        if (parameterName[0] == parameter)
+        {
+            return decodeURIComponent(parameterName[1]);
         }
+    }
+}
+
+function addArgumentToUrl(url, argumentName, argumentValue)
+{
+    if (url.indexOf('?') < 0)
+    {
+        return url + '?' + argumentName + '=' + encodeURIComponent(argumentValue);
+    }
+    else
+    {
+        return url + '&' + argumentName + '=' + encodeURIComponent(argumentValue);
     }
 }

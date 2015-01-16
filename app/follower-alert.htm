@@ -1,45 +1,12 @@
+<!DOCTYPE html>
 <html>
 <head>
     <title>TwitchBox follower alert</title>
+    <link rel="stylesheet" href="styles/followerAlert.css" />
     <script src="scripts/bower/jquery/dist/jquery.min.js"></script>
     <script src="scripts/url-utils.js"></script>
     <script src="scripts/twitch-follower-api-client.js"></script>
     <script src="scripts/hitbox-follower-api-client.js"></script>
-    <style>
-        .follower-alert {
-            position: relative;
-            width: 580px;
-            height: 110px;
-            color: #ffffff;
-        }
-
-        .follower-alert .name {
-            position: absolute;
-            width: 340px;
-            top: 52px;
-            left: 110px;
-            font-size: 30px;
-            line-height: 30px;
-            font-weight: bold;
-            text-shadow: 2px 2px #666666;
-            font-family: "Lucida Grande", "Trebuchet MS", sans-serif;
-            float: left;
-            text-align: center;
-        }
-
-        .follower-alert .provider {
-            position: absolute;
-            top: 20px;
-            left: 355px;
-            font-size: 20px;
-            line-height: 20px;
-            text-shadow: 1px 1px #666666;
-            font-family: "Lucida Grande", "Trebuchet MS", sans-serif;
-            float: left;
-            width: 100px;
-            text-align: right;
-        }
-    </style>
 </head>
 <body>
 <div class="follower-alert">
@@ -47,65 +14,81 @@
     <div class="provider">PROVIDER</div>
 </div>
 <script>
-    var followerAlert = $('.follower-alert');
-    followerAlert.hide();
-    var twitchChannelName = getUrlParameter('twitchChannelName');
-    var hitboxChannelName = getUrlParameter('hitboxChannelName');
-    var backgroundImage = getUrlParameter('imageSource');
-    var soundSource = getUrlParameter('soundSource');
-    var sound;
-
-    if (soundSource)
-    {
-        sound = new Audio(soundSource);
-    }
-    else
-    {
-        console.warn('[Configuration] No sound url defined. Parameter soundSource is missing.');
-    }
-
-    if (backgroundImage)
-    {
-        followerAlert.css('background-image', 'url(' + backgroundImage + ')');
-    }
-    else
-    {
-        console.warn('[Configuration] No image url defined. Parameter imageSource is missing. Using default image.');
-        followerAlert.css('background-image', 'url(images/Default.png)');
-    }
-
-    if (!twitchChannelName)
-    {
-        console.warn('[Twitch] No channel name defined in the url. Parameter twitchChannelName is missing.');
-    }
-    else
-    {
-        listenForNewTwitchFollowers(twitchChannelName, newFollower);
-    }
-
-    if (!hitboxChannelName)
-    {
-        console.warn('[Hitbox] No channel name defined in the url. Parameter hitboxChannelName is missing.');
-    }
-    else
-    {
-        listenForNewHitboxFollowers(hitboxChannelName, newFollower)
-    }
-
-    function newFollower(follower)
+    $(function ()
     {
         var followerAlert = $('.follower-alert');
         followerAlert.hide();
 
+        var twitchChannelName = getUrlParameterValue('twitchChannelName');
+        var hitboxChannelName = getUrlParameterValue('hitboxChannelName');
+        var backgroundImage = getUrlParameterValue('imageSource');
+        var soundSource = getUrlParameterValue('soundSource');
+        var preview = getUrlParameterValue('preview');
+        var sound;
+
         if (soundSource)
         {
-            sound.play();
+            sound = new Audio(soundSource);
+        }
+        else
+        {
+            console.warn('[Configuration] No sound url defined. Parameter soundSource is missing. No sound will be played');
         }
 
-        $('.follower-alert .name').html(follower.user);
-        $('.follower-alert .provider').html(follower.provider);
-        followerAlert.fadeIn(2000).delay(6000).fadeOut(2000);
-    }
+        if (backgroundImage)
+        {
+            followerAlert.css('background-image', 'url(' + backgroundImage + ')');
+        }
+        else
+        {
+            console.warn('[Configuration] No image url defined. Parameter imageSource is missing. Using default image.');
+            followerAlert.css('background-image', 'url(images/Default.png)');
+        }
+
+        if (!twitchChannelName)
+        {
+            console.warn('[Twitch] No channel name defined in the url. Parameter twitchChannelName is missing. Twitch followers will not be monitoried.');
+        }
+        else
+        {
+            listenForNewTwitchFollowers(twitchChannelName, newFollower);
+        }
+
+        if (!hitboxChannelName)
+        {
+            console.warn('[Hitbox] No channel name defined in the url. Parameter hitboxChannelName is missing. Hitbox followers will not be monitored.');
+        }
+        else
+        {
+            listenForNewHitboxFollowers(hitboxChannelName, newFollower)
+        }
+
+        if (preview)
+        {
+            console.log('Firing preview');
+            if (twitchChannelName)
+            {
+                newFollower({user: twitchChannelName, provider: 'Twitch'});
+            } else
+            {
+                newFollower({user: hitboxChannelName, provider: 'Hitbox'});
+            }
+        }
+
+        function newFollower(follower)
+        {
+            followerAlert.hide();
+
+            if (soundSource)
+            {
+                sound.play();
+            }
+
+            $('.follower-alert .name').html(follower.user);
+            $('.follower-alert .provider').html(follower.provider);
+            followerAlert.fadeIn(2000).delay(6000).fadeOut(2000);
+        }
+    });
 </script>
 </body>
 </html>
