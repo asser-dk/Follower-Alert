@@ -46,6 +46,7 @@
                 <a href="#" class="launch-follower-notification"><i class="fa fa-rocket"></i> Launch</a>
                 <ul class="dropdown">
                     <li><a href="#" data-reveal-id="quick-launch-modal"><i class="fa fa-cog"></i> Configure</a></li>
+                    <li><a href="#" class="generate-link"><i class="fa fa-external-link"></i> Generate URL</a></li>
                 </ul>
             </li>
         </ul>
@@ -276,6 +277,10 @@
             localStorage[args.currentTarget.name] = args.currentTarget.value;
         });
 
+        $('#follower-alert-url').click(function(){
+            $(this).select();
+        });
+
         $('.launch-follower-notification').click(function ()
         {
             updateVariablesFromLocalStorage();
@@ -293,12 +298,21 @@
         $('.generate-follower-notification-url').click(function ()
         {
             updateVariablesFromLocalStorage();
-            $('#follower-alert-url')
-                    .val(generateFollowerAlertUrl(twitchChannelName, hitboxChannelName, imageSource, soundSource, previewNotification))
-                    .click(function()
+            $('#follower-alert-url').val(generateFollowerAlertUrl(twitchChannelName, hitboxChannelName, imageSource, soundSource, previewNotification));
+        });
+
+        $('.generate-link').click(function(){
+            updateVariablesFromLocalStorage();
+            if (!twitchChannelName && !hitboxChannelName)
             {
-                $(this).select();
-            });
+                console.warn('No channel names set. Opening configuration modal.');
+                $('#quick-launch-modal').foundation('reveal', 'open');
+            }
+            else
+            {
+                $('#follower-alert-url').val(generateFollowerAlertUrl(twitchChannelName, hitboxChannelName, imageSource, soundSource, previewNotification));
+                $('#follower-alert-url-modal').foundation('reveal', 'open');
+            }
         });
 
         function updateVariablesFromLocalStorage()
