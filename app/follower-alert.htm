@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>TwitchBox follower alert</title>
+    <title>SexyFishHorse Follower alert</title>
     <link rel="stylesheet" href="styles/followerAlert.css" />
     <script src="scripts/bower/jquery/dist/jquery.min.js"></script>
     <script src="scripts/url-utils.js"></script>
@@ -10,8 +10,8 @@
 </head>
 <body>
 <div class="follower-alert">
-    <div class="name">NAME</div>
-    <div class="provider">PROVIDER</div>
+    <div class="name"></div>
+    <div class="provider"></div>
 </div>
 <script>
     $(function ()
@@ -19,10 +19,21 @@
         var followerAlert = $('.follower-alert');
         followerAlert.hide();
 
-        var twitchChannelName = getUrlParameterValue('twitchChannelName');
-        var hitboxChannelName = getUrlParameterValue('hitboxChannelName');
-        var backgroundImage = getUrlParameterValue('imageSource');
-        var soundSource = getUrlParameterValue('soundSource');
+        var urlTwitch =getUrlParameterValue('twitchChannelName');
+        var urlHitbox = getUrlParameterValue('hitboxChannelName');
+        var urlBackground = getUrlParameterValue('imageSource');
+        var urlSound = getUrlParameterValue('soundSource');
+
+        var twitchChannelName = urlTwitch ? urlTwitch : localStorage.twitchChannelName;
+        var hitboxChannelName = urlHitbox ? urlHitbox : localStorage.hitboxChannelName;
+        var backgroundImage = urlBackground ? urlBackground : localStorage.imageSource;
+        var soundSource = urlSound ? urlSound : localStorage.soundSource;
+
+        if(!twitchChannelName && !hitboxChannelName)
+        {
+            window.location.href = 'index.html?configuration';
+        }
+
         var preview = getUrlParameterValue('preview');
         var sound;
 
