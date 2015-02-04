@@ -32,5 +32,10 @@ function generateFollowerAlertUrl(twitchChannelName, hitboxChannelName, imageSou
 
 function launchFollowerAlert(twitchChannelName, hitboxChannelName, imageSource, soundSource, previewNotification)
 {
-    window.open(generateFollowerAlertUrl(twitchChannelName, hitboxChannelName, imageSource, soundSource, previewNotification));
+    if(Modernizr.localstorage)
+    {
+        window.open('http://followeralert.sexyfishhorse.com/follower-alert.htm');
+    }else{
+        window.open(generateFollowerAlertUrl(twitchChannelName, hitboxChannelName, imageSource, soundSource, previewNotification));
+    }
 }

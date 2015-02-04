@@ -19,10 +19,21 @@
         var followerAlert = $('.follower-alert');
         followerAlert.hide();
 
-        var twitchChannelName = getUrlParameterValue('twitchChannelName');
-        var hitboxChannelName = getUrlParameterValue('hitboxChannelName');
-        var backgroundImage = getUrlParameterValue('imageSource');
-        var soundSource = getUrlParameterValue('soundSource');
+        var urlTwitch =getUrlParameterValue('twitchChannelName');
+        var urlHitbox = getUrlParameterValue('hitboxChannelName');
+        var urlBackground = getUrlParameterValue('imageSource');
+        var urlSound = getUrlParameterValue('soundSource');
+
+        var twitchChannelName = urlTwitch ? urlTwitch : localStorage.twitchChannelName;
+        var hitboxChannelName = urlHitbox ? urlHitbox : localStorage.hitboxChannelName;
+        var backgroundImage = urlBackground ? urlBackground : localStorage.imageSource;
+        var soundSource = urlSound ? urlSound : localStorage.soundSource;
+
+        if(!twitchChannelName && !hitboxChannelName)
+        {
+            window.location.href = 'index.html?configuration';
+        }
+
         var preview = getUrlParameterValue('preview');
         var sound;
 

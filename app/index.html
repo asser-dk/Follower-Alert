@@ -272,17 +272,13 @@
 
         hljs.initHighlightingOnLoad();
 
-        $('.follower-alert').hide();
-        $('.large-launch-button').hide();
-        $('.preview1').fadeIn(1000).delay(2000).fadeOut(1000)
-                .next().delay(4000).fadeIn(1000).delay(2000).fadeOut(1000)
-                .next().delay(8000).fadeIn(2000);
-
         var twitchChannelName = localStorage.twitchChannelName;
         var hitboxChannelName = localStorage.hitboxChannelName;
         var imageSource = localStorage.imageSource;
         var soundSource = localStorage.soundSource;
         var previewNotification = localStorage.previewNotification;
+
+        var largeLaunchButton = $('.large-launch-button');
 
         $('#twitchChannelName').val(twitchChannelName);
         $('#hitboxChannelName').val(hitboxChannelName);
@@ -294,6 +290,21 @@
         {
             localStorage[args.currentTarget.name] = args.currentTarget.value;
         });
+
+        $('.follower-alert').hide();
+        largeLaunchButton.hide();
+
+        if(getUrlParameterValue('configuration'))
+        {
+            largeLaunchButton.show();
+            $('#quick-launch-modal').foundation('reveal', 'open');
+        }
+        else
+        {
+            $('.preview1').fadeIn(1000).delay(2000).fadeOut(1000)
+                    .next().delay(4000).fadeIn(1000).delay(2000).fadeOut(1000)
+                    .next().delay(8000).fadeIn(2000);
+        }
 
         $('#follower-alert-url').click(function(){
             $(this).select();
