@@ -1,0 +1,65 @@
+@import '../scripts/bower/foundation/scss/foundation';
+
+$theme-colour-gradient: #e00000;
+$theme-colour-border: #aa0000;
+$shadow-colour: #999999;
+
+$primary-color: #d30000;
+$secondary-color: #e7e7e7;
+$alert-color: #f04124;
+$success-color: #43AC6A;
+$warning-color: #f08a24;
+$info-color: #a0d3e8;
+
+$button-bg-color: $primary-color !default;
+$button-bg-hover: scale-color($button-bg-color, $lightness: $button-function-factor) !default;
+
+.row {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: initial;
+}
+
+.reveal-modal {
+    overflow-y: auto;
+}
+
+.button {
+    background-color: $primary-color;
+    box-shadow: 0 2px 1px 1px $shadow-colour;
+}
+
+.button:hover
+{
+    background-color: darken($primary-color, 10);
+}
+
+.top-bar {
+    background: linear-gradient(to top, $primary-color, $theme-colour-gradient);
+    box-shadow: 0 0 1px 1px $shadow-colour;
+    padding: 0 5px;
+
+    li, li a:not(.button) {
+        background-color: transparent !important;
+    }
+
+    .dropdown {
+        background-color: $theme-colour-gradient;
+        box-shadow: 0 2px 1px 1px $shadow-colour;
+    }
+
+    .divider {
+        border-right: solid 1px $theme-colour-border !important;
+        background: $theme-colour-border;
+    }
+}
+
+.large-launch-button {
+    margin: auto;
+    width: 200px;
+    display: block;
+    position: relative;
+    top: 50%;
+    transform: translate(0, -50%);
+}

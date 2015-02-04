@@ -1,0 +1,15 @@
+@import 'sfhStyle';
+@import 'followerAlert';
+
+.quick-launch-list {
+    width: 150px;
+}
+
+.follower-alert
+{
+    background-image: url(../images/Default.png);
+    margin-left: auto;
+    margin-right: auto;
+    top: 50%;
+    transform: translate(0, -50%);
+}
